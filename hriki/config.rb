@@ -80,6 +80,8 @@ module Hriki #:nodoc:
     @@destdir = "~/www"
     @@htmlext = ".html"
     @@srcext = ".mdwn"
+    @@preprocdir = "~/code/hriki/hriki/preprocess"
+    @@plugin = ['basic_clean']
     
     # give them some getters and setters!
     class_variables.each { |v| mattr_accessor v[(2..-1)] }

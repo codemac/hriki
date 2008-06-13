@@ -12,8 +12,8 @@ module Hriki
                                                      Config.destdir,
                                                      File.basename(path, Config.srcext)
                                                      ) + Config.htmlext), "w")
-      preproc = Preprocess.new(File.read(path))
-      mdwnsrc = Maruku.new(preproc).to_html
+      preproc = PreProcess.run_plugins(File.read(path))
+      mdwnsrc = Maruku.new(preproc.to_s).to_html
       hengine = Haml::Engine.new(mdwnsrc)
       @destfile.write(hengine.to_html)
     end

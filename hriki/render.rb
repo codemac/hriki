@@ -4,6 +4,7 @@
 require 'find'
 require 'hriki/page'
 require 'hriki/config'
+require 'hriki/preprocess'
 
 module Hriki
   class Render
@@ -12,6 +13,7 @@ module Hriki
     # plug markdown into haml
     # markdown.to_html
     def self.all
+      PreProcess.load_plugins
       Find.find(File.expand_path(Config.srcdir)) do |path|
         if File.extname(path).downcase != Config.srcext
           puts "Skipping incorrect extenion: #{path}"

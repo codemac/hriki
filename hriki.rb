@@ -71,14 +71,17 @@ module Hriki
 #           Config.numbacklinks = b
 #         end
         
-         opts.on("--srcdir SRCDIR", "The directory to draw from!") do |s|
-           Config.srcdir = s
-         end
-
-         opts.on("--destdir DESTDIR", "The destination!") do |d|
-           Config.destdir = d
-         end
-
+        opts.on("--srcdir SRCDIR", "The directory to draw from!") do |s|
+          Config.srcdir = s
+        end
+        
+        opts.on("--destdir DESTDIR", "The destination!") do |d|
+          Config.destdir = d
+        end
+        
+        opts.on("--preprocdir PROCDIR", "Where plugins are held") do |d|
+          Config.preprocdir = d
+        end
 #         opts.on("--rcs RCS", [:git, :svn, :hg], "Set the RCS type to pull the wiki from") do |r|
 #           Config.rcs = r
 #         end
@@ -147,9 +150,9 @@ module Hriki
 #           Config.underlaydir = u
 #         end
 
-#         opts.on("--plugin x,y,z", Array, "List of plugins to use") do |p|
-#           Config.plugin = p
-#         end
+         opts.on("--plugin x,y,z", Array, "List of plugins to use") do |p|
+           Config.plugin = p
+         end
 
 #         opts.on("--disable-plugin x,y,z", Array, "List of plugns to not use") do |d|
 #           Config.disable_plugin = d
@@ -178,10 +181,11 @@ module Hriki
 
   def self.run
     Opts.parse(ARGV)
-    Config.srcdir = "~/code/test/hriki/src"
-    Config.destdir = "~/code/test/hriki/dest"
+    Config.srcdir = "~/code/hriki/test/src"
+    Config.destdir = "~/code/hriki/test/dest"
     Config.htmlext = ".html"
     Config.srcext = ".mdwn"
+    Config.plugin = ['basic_clean']
     puts "Oh, this wont go well..."
     Render.all
   end
